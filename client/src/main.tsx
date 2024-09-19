@@ -8,7 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 
 const router = createBrowserRouter([
   {
-    path: "/verification",
+    path: "/",
     element: <Verficiation codeLength={6} />,
   },
   {
