@@ -9,7 +9,7 @@ app = epxress();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
-app.use(cors({ origin: [process.env.EXPRESS_CLIENT_ORIGIN] }));
+app.use(cors({ origin: ["https://verification-code-task-app.vercel.app"] }));
 
 app.get("/", (req, res) => {
   res.status(200).json({ detail: process.env.EXPRESS_CLIENT_ORIGIN });
