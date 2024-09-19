@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
 app.use(
   cors({
-    origin: [process.env.EXPRESS_CLIENT_ORIGIN],
+    origin: process.env.EXPRESS_CLIENT_ORIGIN.split(","),
     methods: ["GET", "POST"],
   })
 );
