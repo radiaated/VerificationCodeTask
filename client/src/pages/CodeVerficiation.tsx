@@ -93,16 +93,16 @@ const CodeVerficiation = ({ codeLength }: TypeCodeVerficiation) => {
       let tempState = [...state];
 
       let j: number = 0;
+      let i: number = currentInputIndex;
 
       // Sets the value from clipboard to each input element
-      for (
-        let i: number = currentInputIndex;
-        i < codeLength && j < clipboardString.length;
-        i++
-      ) {
+      while (i < codeLength && j < clipboardString.length) {
         tempState[i] = clipboardString[j];
         j++;
+        i++;
       }
+
+      inputRef.current[i < codeLength ? i : codeLength - 1].focus();
 
       return tempState;
     });
