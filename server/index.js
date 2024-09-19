@@ -9,7 +9,7 @@ app = epxress();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
-app.use(cors({ origin: [process.env.CLIENT_ORIGIN] }));
+app.use(cors({ origin: [process.env.EXPRESS_CLIENT_ORIGIN] }));
 
 app.post("/code", (req, res) => {
   if (!("code" in req.body)) {
@@ -33,6 +33,6 @@ app.post("/code", (req, res) => {
   }
 });
 
-app.listen(process.env.PORT, "127.0.0.1", () => {
-  console.log(`Server running on http://127.0.0.1:${process.env.PORT}`);
+app.listen(process.env.EXPRESS_PORT, "127.0.0.1", () => {
+  console.log(`Server running on http://127.0.0.1:${process.env.EXPRESS_PORT}`);
 });
