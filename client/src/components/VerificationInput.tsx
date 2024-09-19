@@ -39,6 +39,7 @@ const VerificationInput = ({
         onChange={onChange}
         onPaste={onPaste}
         onKeyDown={onKeyDown}
+        autoComplete="off"
       />
     </div>
   );
