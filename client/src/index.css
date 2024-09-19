@@ -51,6 +51,7 @@ small {
 
 .container {
   display: flex;
+  position: relative;
   flex-direction: column;
   place-items: center;
   gap: 1em;
@@ -106,6 +107,10 @@ input[type="submit"]:disabled {
 
 .message {
   font-size: 0.75rem;
+  position: absolute;
+  top: -2em;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .error-message {
