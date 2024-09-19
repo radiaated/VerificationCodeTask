@@ -12,7 +12,7 @@ app.use(bodyParser.json({ extended: true }));
 app.use(cors({ origin: [process.env.EXPRESS_CLIENT_ORIGIN] }));
 
 app.get("/", (req, res) => {
-  res.status(200).json({ detail: "home" });
+  res.status(200).json({ detail: process.env.EXPRESS_CLIENT_ORIGIN });
 });
 
 app.post("/code", (req, res) => {
