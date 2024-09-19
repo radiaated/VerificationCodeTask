@@ -1,9 +1,15 @@
-import React, { ChangeEvent, ClipboardEvent, KeyboardEvent } from "react";
+import React, {
+  ChangeEvent,
+  ClipboardEvent,
+  KeyboardEvent,
+  InputHTMLAttributes,
+} from "react";
 
-type InputProps = {
+// Type for the component's props
+type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   value: string;
   name: string;
-  inpRef: React.MutableRefObject<{}>;
+  ref_: React.MutableRefObject<{}>;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onPaste: (event: ClipboardEvent<HTMLInputElement>) => void;
   onKeyDown: (event: KeyboardEvent<HTMLInputElement>) => void;
@@ -11,7 +17,7 @@ type InputProps = {
 const VerificationInput = ({
   value,
   name,
-  inpRef,
+  ref_,
   onChange,
   onPaste,
   onKeyDown,
@@ -28,7 +34,7 @@ const VerificationInput = ({
         value={value}
         name={name}
         ref={(el) => {
-          inpRef.current = { ...inpRef.current, [name]: el };
+          ref_.current = { ...ref_.current, [name]: el };
         }}
         onChange={onChange}
         onPaste={onPaste}

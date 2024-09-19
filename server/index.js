@@ -9,6 +9,8 @@ app = epxress();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
+
+// Handles CORS
 app.use(
   cors({
     origin: process.env.EXPRESS_CLIENT_ORIGIN.split(","),
@@ -16,9 +18,13 @@ app.use(
   })
 );
 
+// POST endpoint for code verification
 app.post("/api/code", (req, res) => {
+  // Checks if the code exists in the POST request body
   if (!("code" in req.body)) {
-    res.status(400).json({ detail: "Code does not exist in the POST body" });
+    res
+      .status(400)
+      .json({ detail: "Code does not exist in the POST request body" });
     return;
   }
 
@@ -27,13 +33,18 @@ app.post("/api/code", (req, res) => {
 
     const codeInString = String(code);
 
+    // Throws "Verification Error" message if the code in string format is non-numeric or last digit is "7"
+
     if (!/^\d{6}$/.test(codeInString) || codeInString[5] === "7") {
       res.status(400).json({ detail: "Verification Error" });
       return;
     }
 
+    // Sends success message if the code passses all the checks
+
     res.status(200).json({ detail: "Success" });
   } catch {
+    // Throws "Internal server error" if any error occurs in the execution of the user's requests
     res.status(500).json({ detail: "Internal server error" });
   }
 });
