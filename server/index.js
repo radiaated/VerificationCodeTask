@@ -9,7 +9,12 @@ app = epxress();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
-app.use(cors({ origin: [process.env.EXPRESS_CLIENT_ORIGIN] }));
+app.use(
+  cors({
+    origin: [process.env.EXPRESS_CLIENT_ORIGIN],
+    methods: ["GET", "POST"],
+  })
+);
 
 app.post("/code", (req, res) => {
   if (!("code" in req.body)) {

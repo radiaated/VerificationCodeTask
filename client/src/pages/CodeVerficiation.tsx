@@ -22,6 +22,7 @@ const CodeVerficiation = ({ codeLength }: TypeCodeVerficiation) => {
   const [code, setCode] = useState<string[]>(Array(codeLength).fill(""));
 
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -85,8 +86,9 @@ const CodeVerficiation = ({ codeLength }: TypeCodeVerficiation) => {
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setLoading(true);
     setErrorMessage("");
-    axios({
+    await axios({
       method: "POST",
       url: `${import.meta.env.VITE_API_URL}/code/`,
       headers: {
@@ -106,6 +108,7 @@ const CodeVerficiation = ({ codeLength }: TypeCodeVerficiation) => {
           setErrorMessage(error.response.data.detail);
         }
       });
+    setLoading(false);
   };
 
   return (
@@ -114,7 +117,12 @@ const CodeVerficiation = ({ codeLength }: TypeCodeVerficiation) => {
         <title>Verification</title>
       </Helmet>
       <div className="container">
-        <div className="error-message">{errorMessage ?? errorMessage}</div>
+        <div className="message">
+          {errorMessage && (
+            <span className="error-message">{errorMessage}</span>
+          )}
+          {loading && "Loading..."}
+        </div>
         <h2>Verification code</h2>
         <form onSubmit={onSubmit} className="verifcation-code-form">
           <div className="verifcation-code-input-container">
@@ -131,7 +139,7 @@ const CodeVerficiation = ({ codeLength }: TypeCodeVerficiation) => {
             ))}
           </div>
 
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" disabled={loading} />
         </form>
       </div>
     </>
