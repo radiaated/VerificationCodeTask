@@ -16,7 +16,7 @@ app.use(
   })
 );
 
-app.post("/code", (req, res) => {
+app.post("/api/code", (req, res) => {
   if (!("code" in req.body)) {
     res.status(400).json({ detail: "Code does not exist in the POST body" });
     return;
