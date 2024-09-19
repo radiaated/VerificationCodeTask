@@ -11,6 +11,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
 app.use(cors({ origin: [process.env.EXPRESS_CLIENT_ORIGIN] }));
 
+app.get("/", (req, res) => {
+  res.status(200).json({ detail: "home" });
+});
+
 app.post("/code", (req, res) => {
   if (!("code" in req.body)) {
     res.status(400).json({ detail: "Code does not exist in the POST body" });
